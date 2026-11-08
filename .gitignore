@@ -1,0 +1,4 @@
+# Original student files show national ID numbers and contact details — never publish them.
+stdnts/
+# Scripts that build assets/media from those originals; not part of the website.
+tools/

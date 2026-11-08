@@ -1,0 +1,133 @@
+/* Hassan Hamzah Alshakhs — portfolio page. Builds on site.css (scenes, beats, paper). */
+
+/* ---------- 1. cover ---------- */
+.hz-crumbs { position: absolute; top: clamp(14px, 3vw, 28px); inset-inline-start: var(--gutter); margin: 0; }
+.hz-name { font-size: clamp(3rem, 1.4rem + 6.6vw, 6.25rem); line-height: 1.15; }
+.hz-alt { color: var(--on-dark-3); font-size: var(--fs-lead); }
+.hz-role { margin-top: 12px; padding: 6px 18px; border-radius: 999px; background: rgb(255 255 255 / 0.1); font-size: 1rem; font-weight: 500; }
+.hz-lead { max-width: 30ch; font-size: clamp(1.75rem, 1.15rem + 2.4vw, 3.25rem); font-weight: 600; line-height: 1.45; }
+html[lang="en"] .hz-lead { max-width: 32ch; line-height: 1.25; letter-spacing: -0.015em; }
+
+/* ---------- 2. Mawhiba test ---------- */
+.hz-label { max-width: 30ch; color: var(--lilac); font-size: var(--fs-lead); font-weight: 600; line-height: 1.5; }
+.hz-count { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 4px 16px; }
+.hz-count__n {
+  display: inline-block; min-width: 4ch; text-align: end;
+  font-size: var(--fs-numeral); font-weight: 700; line-height: 0.95;
+  letter-spacing: -0.03em; font-variant-numeric: tabular-nums;
+}
+.hz-count__of { color: var(--lilac); font-size: var(--fs-h3); font-weight: 600; }
+.meter { width: min(82vw, 600px); height: 12px; margin-top: 18px; border-radius: 999px; background: rgb(255 255 255 / 0.14); overflow: hidden; }
+.meter__fill { display: block; width: calc(var(--v) * 100%); height: 100%; border-radius: inherit; background: var(--lilac); transform-origin: right center; }
+[dir="ltr"] .meter__fill { transform-origin: left center; }
+.hz-english { color: #fff; font-size: var(--fs-display); line-height: 1.2; }
+.hz-score__doc { width: min(80vw, 560px, max(160px, (100svh - var(--nav-h) - 250px) * 1.29)); }
+
+/* ---------- 3. KACST ---------- */
+.hz-kacst .stage { align-content: center; gap: clamp(18px, 3.4vh, 36px); }
+.hz-kacst__head { display: grid; justify-items: center; gap: 10px; }
+.hz-sub { max-width: 46ch; color: var(--mint); font-size: var(--fs-lead); }
+.hz-kacst__doc { width: min(88vw, 880px, max(180px, (100svh - var(--nav-h) - 330px) * 1.5)); }
+
+/* ---------- 4. Ibdaa ---------- */
+.hz-ibdaa__in { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+.hz-photo__btn {
+  display: block; width: 100%; padding: 0; border: 0; border-radius: 24px;
+  background: var(--mist); overflow: clip; cursor: zoom-in;
+}
+.hz-photo__zoom { position: relative; display: block; }
+.hz-photo__zoom img { width: 100%; height: auto; }
+.hz-ibdaa__text { display: grid; justify-items: start; gap: 16px; }
+.hz-ibdaa__text .h2 { font-size: clamp(2rem, 1.3rem + 2.2vw, 3.25rem); }
+.nowrap { white-space: nowrap; }
+.hz-thumb { width: min(100%, 300px); margin-top: 8px; }
+
+/* name label on the group photo, pointing at Hassan */
+.pin {
+  position: absolute; left: var(--x); top: var(--y);
+  translate: -50% calc(-100% - 12px);
+  padding: 2px 12px; border-radius: 999px;
+  background: var(--deep); color: #fff;
+  font-size: 0.875rem; font-weight: 600; line-height: 1.7; white-space: nowrap;
+  box-shadow: 0 6px 14px -4px rgb(0 0 0 / 0.45);
+  pointer-events: none;
+}
+.pin::after { content: ""; position: absolute; left: 50%; top: 100%; width: 2px; height: 12px; margin-left: -1px; background: #fff; box-shadow: 0 0 0 1px rgb(9 64 62 / 0.5); }
+
+/* ---------- 5. more results ---------- */
+.hz-more { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(14px, 2vw, 24px); margin-top: clamp(28px, 4vw, 48px); }
+.hz-res { display: grid; align-content: start; justify-items: start; gap: 8px; padding: clamp(24px, 3vw, 40px); border-radius: 28px; background: #fff; }
+.hz-res__num { color: var(--deep); font-size: clamp(3.5rem, 2rem + 5vw, 6rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.03em; }
+.hz-res__num small { margin-inline-start: 12px; color: var(--muted); font-size: 1.125rem; font-weight: 500; letter-spacing: 0; }
+.hz-res__num--word { letter-spacing: 0; }
+.hz-res__meta { color: var(--muted); }
+.hz-res__doc { width: min(100%, 360px); margin-top: 16px; }
+
+/* ---------- 6. skills: short tags (the timeline below gives the years) ---------- */
+.hz-skills { margin-top: clamp(24px, 4vw, 44px); gap: 12px; }
+.hz-skills .tag { padding: 12px 22px; font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.3125rem); font-weight: 600; }
+.hz-skills .tag .ic { width: 24px; height: 24px; color: var(--deep); }
+
+/* ---------- 7. timeline ---------- */
+.hz-tl { padding-block: clamp(72px, 10vw, 140px); }
+.tl { --tl-grow: grow-y; position: relative; list-style: none; margin-top: clamp(28px, 4vw, 48px); padding-inline-start: 40px; }
+.tl::before, .tl::after { content: ""; position: absolute; inset-inline-start: 7px; top: 14px; bottom: 14px; width: 2px; border-radius: 2px; background: rgb(255 255 255 / 0.16); }
+.tl::after { background: var(--mint); transform-origin: top center; }
+.tl > li { position: relative; display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 4px 24px; padding-block: 16px; }
+.tl > li::before { content: ""; position: absolute; inset-inline-start: -40px; top: 26px; width: 16px; height: 16px; border-radius: 4px; background: var(--deep); box-shadow: inset 0 0 0 2px var(--mint); }
+.tl__year { color: var(--mint); font-size: 1.75rem; font-weight: 700; line-height: 1.3; }
+.tl ul { display: grid; gap: 6px; list-style: none; color: var(--on-dark-2); font-size: 1.0625rem; }
+/* wide screens: the years sit side by side on one line that fills as you scroll */
+@media (min-width: 900px) {
+  .tl { --tl-grow: grow-x; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; padding-inline-start: 0; padding-top: 48px; }
+  .tl::before, .tl::after { inset-inline: 0; top: 7px; bottom: auto; width: auto; height: 2px; }
+  .tl::after { transform-origin: right center; }
+  [dir="ltr"] .tl::after { transform-origin: left center; }
+  .tl > li { grid-template-columns: 1fr; align-content: start; padding-block: 0; }
+  .tl > li::before { inset-inline-start: 0; top: -48px; }
+  .tl__year { font-size: 2.25rem; }
+}
+
+/* ---------- motion (see site.css for the scene system) ---------- */
+@property --n { syntax: '<integer>'; inherits: false; initial-value: 0; }
+@keyframes count-1655 { from { --n: 0; } to { --n: 1655; } }
+@keyframes grow-doc { from { scale: 0.55; translate: 0 6vh; } }
+@keyframes grow-y { from { scale: 1 0; } }
+@keyframes zoom-out { from { scale: 1.16; } }
+
+@supports ((animation-timeline: view()) and (animation-range: entry)) {
+  .hz-kacst__done { animation: fade-in linear both; animation-timeline: --scene; animation-range: contain 58% contain 74%; }
+  .tl { view-timeline: --tl block; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* 1655 counts up and the bar fills while the screen is pinned */
+    /* finishes early (contain 6%) so 1655 stays still on screen until the next screen takes over at 23% */
+    .hz-count__n { counter-reset: n var(--n); animation: count-1655 linear both; animation-timeline: --scene; animation-range: entry 40% contain 6%; }
+    .hz-count__n > span { display: none; }
+    .hz-count__n::before { content: counter(n); }
+    .meter__fill { animation: grow-x linear both; animation-timeline: --scene; animation-range: entry 40% contain 6%; }
+
+    .hz-kacst__doc { animation: grow-doc linear both; animation-timeline: --scene; animation-range: entry 35% contain 62%; }
+    .hz-photo__zoom { animation: zoom-out linear both; animation-timeline: view(); animation-range: entry 0% cover 55%; }
+    .tl::after { animation: var(--tl-grow) linear both; animation-timeline: --tl; animation-range: entry 50% contain 60%; }
+  }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 960px) {
+  .hz-ibdaa__in { grid-template-columns: 1fr; }
+  .hz-more { grid-template-columns: 1fr; }
+}
+/* short screens (phones on their side) */
+@media (max-height: 560px) {
+  .hz-crumbs, .hz-sub { display: none; }
+  .hz-kacst .stage { gap: 10px; }
+  .hz-kacst__head .h2 { font-size: 1.75rem; }
+  .hz-kacst__doc { width: min(88vw, 880px, (100svh - var(--nav-h) - 130px) * 1.5); }
+  .hz-score__doc { width: min(80vw, 560px, (100svh - var(--nav-h) - 110px) * 1.29); }
+}
+@media (max-width: 640px) {
+  .hz-crumbs { display: none; }
+  .tl > li { grid-template-columns: 1fr; }
+  .tl > li::before { top: 24px; }
+}
