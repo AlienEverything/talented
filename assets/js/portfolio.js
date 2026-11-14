@@ -17,16 +17,31 @@
 
   /* ---------- online storage ---------- */
   const CFG = window.ATHAR_DB || {};
-  const BASE = String(CFG.url || '').replace(/\/+$/, '');
+  // Accept either the project URL or the REST API URL copied from the dashboard.
+  const BASE = String(CFG.url || '').replace(/\/+$/, '').replace(/\/rest\/v1$/, '');
   const ONLINE = !!(BASE && CFG.key);
   // legacy anon keys are JWTs and also go in Authorization; new publishable keys go in apikey only
   const headers = { apikey: CFG.key, 'Content-Type': 'application/json', ...(/^eyJ/.test(CFG.key || '') ? { Authorization: `Bearer ${CFG.key}` } : {}) };
   const get = (path) => fetch(`${BASE}/rest/v1/${path}`, { headers, cache: 'no-store' })
     .then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); });
   // Every edit function answers { ok: true, ... } or { ok: false, error: '...' }.
-  const rpc = (fn, body) => fetch(`${BASE}/rest/v1/rpc/${fn}`, { method: 'POST', headers, body: JSON.stringify(body) })
-    .then((r) => (r.ok ? r.json() : { ok: false, error: 'network' }))
-    .catch(() => ({ ok: false, error: 'network' }));
+  const rpc = async (fn, body) => {
+    let r;
+    try {
+      r = await fetch(`${BASE}/rest/v1/rpc/${fn}`, { method: 'POST', headers, body: JSON.stringify(body) });
+    } catch {
+      return { ok: false, error: 'network' };
+    }
+    if (!r.ok) {
+      return { ok: false, error: [401, 403, 404].includes(r.status) ? 'configuration' : 'server', status: r.status };
+    }
+    try {
+      const result = await r.json();
+      return result && typeof result.ok === 'boolean' ? result : { ok: false, error: 'server' };
+    } catch {
+      return { ok: false, error: 'server' };
+    }
+  };
 
   const saved = {}; // student id -> saved portfolio data
   const savedReady = ONLINE
@@ -206,9 +221,11 @@
       invalid: 'تعذّر الحفظ: بعض البيانات غير صالحة.',
       too_big: 'المحتوى أو الصورة أكبر من المسموح.',
       too_many: 'وصلت إلى الحد الأعلى لعدد الصور.',
+      configuration: 'تعذّر الوصول إلى خدمة الحفظ. تواصل مع حسن الشخص للتحقق من إعدادات الخدمة.',
+      server: 'حدث خطأ في خدمة الحفظ. حاول مرة أخرى، وإذا استمر الخطأ فتواصل مع حسن الشخص.',
       network: 'تعذّر الاتصال. تأكد من الإنترنت وحاول مرة أخرى.',
     };
-    const errText = (r) => ERR[r && r.error] || ERR.network;
+    const errText = (r) => ERR[r && r.error] || ERR.server;
 
     let dlg;
     function askPassword() {
